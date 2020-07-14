@@ -1,5 +1,3 @@
-#include <list>
-
 #ifndef DNSServer_h
 #define DNSServer_h
 #include <WiFiUdp.h>

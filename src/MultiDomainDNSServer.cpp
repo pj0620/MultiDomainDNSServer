@@ -110,7 +110,6 @@ void MultiDomainDNSServer::respondToRequest(uint8_t *buffer, size_t length)
   query = start = buffer + DNS_HEADER_SIZE;
   remaining = length - DNS_HEADER_SIZE;
   while (remaining != 0 && *start != 0) {
-	Serial.printf("start = %c\n\n", *start);
     labelLength = *start;
     if (labelLength + 1 > remaining)
 	  return replyWithError(dnsHeader, DNSReplyCode::FormError);
@@ -164,7 +163,7 @@ void MultiDomainDNSServer::respondToRequest(uint8_t *buffer, size_t length)
 	  labelLength = *start;
 	  start += 1;
 	  while (labelLength > 0) {
-	    if (tolower(*start) != *matchString) {
+		if (tolower(*start) != *matchString) {
 		  isSame = false;
 		  break;
 		}
@@ -236,9 +235,6 @@ void MultiDomainDNSServer::replyWithIP(DNSHeader *dnsHeader,
   dnsHeader->ANCount = lwip_htons(1);
   dnsHeader->NSCount = 0;
   dnsHeader->ARCount = 0;
-  
-  Serial.printf("queryLength = %d\n", queryLength);
-  Serial.printf("query = %s\n\n", query);
 
   _udp.beginPacket(_udp.remoteIP(), _udp.remotePort());
   _udp.write((unsigned char *) dnsHeader, sizeof(DNSHeader));
