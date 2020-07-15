@@ -17,21 +17,22 @@ MultiDomainDNSServer::MultiDomainDNSServer()
   _errorReplyCode = DNSReplyCode::NonExistentDomain;
 }
 
-/*
+
 bool MultiDomainDNSServer::start(const uint16_t &port, const String &domainName,
 							const IPAddress &resolvedIP)
 {
   _port = port;
   
-  _domainNames = domainName;
-  _resolvedIP[0] = resolvedIP[0];
-  _resolvedIP[1] = resolvedIP[1];
-  _resolvedIP[2] = resolvedIP[2];
-  _resolvedIP[3] = resolvedIP[3];
-  downcaseAndRemoveWwwPrefix(_domainName);
+  _numDomains = 1;
+  _domainNames[0] = domainName;
+  _resolvedIPs[0][0] = resolvedIP[0];
+  _resolvedIPs[0][1] = resolvedIP[1];
+  _resolvedIPs[0][2] = resolvedIP[2];
+  _resolvedIPs[0][3] = resolvedIP[3];
+  downcaseAndRemoveWwwPrefix(_domainNames[0]);
   return _udp.begin(_port) == 1;
 }
-*/
+
 
 bool MultiDomainDNSServer::start(const uint16_t &port, const String* domainNames,
 							const IPAddress* resolvedIPs, const int numDomains)

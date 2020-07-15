@@ -1,16 +1,21 @@
 #include <ESP8266WiFi.h>
-#include <DNSServer.h>
+#include <MultiDomainDNSServer.h>
 #include <ESP8266WebServer.h>
 
 const byte DNS_PORT = 53;
 IPAddress apIP(192, 168, 1, 1);
-DNSServer dnsServer;
+IPAddress googleIP(192, 168, 1, 2);
+IPAddress youtubeIP(192, 168, 1, 3);
+IPAddress redditIP(192, 168, 1, 4);
+MultiDomainDNSServer dnsServer;
 ESP8266WebServer webServer(80);
 
 void setup() {
   WiFi.mode(WIFI_AP);
   WiFi.softAPConfig(apIP, apIP, IPAddress(255, 255, 255, 0));
-  WiFi.softAP("DNSServer example");
+  WiFi.softAP("MultiDomainDNSServer example");
+
+  Serial.begin(9600);
 
   // modify TTL associated  with the domain name (in seconds)
   // default is 60 seconds
@@ -19,10 +24,13 @@ void setup() {
   // ServerFailure instead of NonExistentDomain will reduce number of queries
   // sent by clients)
   // default is DNSReplyCode::NonExistentDomain
+
+  String domains[] = {"google.com", "youtube.com", "reddit.com", "*"};
+  IPAddress addrs[] = {googleIP, youtubeIP, redditIP, apIP};
+  dnsServer.start(DNS_PORT, domains, addrs, 4);
   dnsServer.setErrorReplyCode(DNSReplyCode::ServerFailure);
 
   // start DNS server for a specific domain name
-  dnsServer.start(DNS_PORT, "www.example.com", apIP);
 
   // simple HTTP server to see that DNS server is working
   webServer.onNotFound([]() {

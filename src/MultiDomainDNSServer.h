@@ -15,6 +15,8 @@
 #define MAX_DNSNAME_LENGTH 253
 #define MAX_DNS_PACKETSIZE 512
 
+#define MAX_DOMAINS 100
+
 enum class DNSReplyCode
 {
   NoError = 0,
@@ -79,8 +81,8 @@ class MultiDomainDNSServer
   private:
     WiFiUDP _udp;
     uint16_t _port;
-    String _domainNames[100];
-    unsigned char _resolvedIPs[100][4];
+    String _domainNames[MAX_DOMAINS];
+    unsigned char _resolvedIPs[MAX_DOMAINS][4];
 	int _numDomains;
     uint32_t _ttl;
     DNSReplyCode _errorReplyCode;

@@ -1,10 +1,10 @@
 #include <ESP8266WiFi.h>
-#include <DNSServer.h>
+#include <MultiDomainDNSServer.h>
 #include <ESP8266WebServer.h>
 
 const byte DNS_PORT = 53;
 IPAddress apIP(172, 217, 28, 1);
-DNSServer dnsServer;
+MultiDomainDNSServer dnsServer;
 ESP8266WebServer webServer(80);
 
 String responseHTML = ""
@@ -17,7 +17,7 @@ String responseHTML = ""
 void setup() {
   WiFi.mode(WIFI_AP);
   WiFi.softAPConfig(apIP, apIP, IPAddress(255, 255, 255, 0));
-  WiFi.softAP("DNSServer CaptivePortal example");
+  WiFi.softAP("MultiDomainDNSServer CaptivePortal example");
 
   // if DNSServer is started with "*" for domain name, it will reply with
   // provided IP to all DNS request
