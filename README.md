@@ -10,7 +10,7 @@ In the stock [DNSServer](https://github.com/esp8266/Arduino/tree/master/librarie
 | youtube.com   | 192.168.1.3   |
 | reddit.com    | 192.168.1.4   |
 
-It would be impossible to implement this domain name to IP Address mapping using the standard DNSServer library. This is possible with the MultiDomainDNSServer library. This exact example can be found [here](examples\MultiDomainDNSServer.ino). 
+It would be impossible to implement this domain name to IP Address mapping using the standard DNSServer library. This is possible with the MultiDomainDNSServer library. This exact example can be found [here](https://github.com/pj0620/MultiDomainDNSServer/blob/master/examples/MultiDomainCaptivePortal/MultiDomainCaptivePortal.ino). 
 
 ## Redirecting all DNS Queries
 To redirect all domain names to the same IP Address, use the "*" domain name just like the DNSServer library. To see an example of this, check [here](examples/CaptivePortal/CaptivePortal.ino).
